@@ -1,0 +1,8 @@
+.loadtext, .loadtitle {
+    animation: fadeInUp 1s 1;
+    display: inline-block;
+}
+
+.loadtitle {
+    animation-delay: 200ms;
+}
