@@ -34,14 +34,8 @@ function LoadScreen() {
   }, []);
 
   return isLoading ? (
-    <div className="loadscreen bg-zinc-900 fixed top-0 left-0 w-screen h-screen text-[clamp(32px,10vw,72px)] text-gray-800 text-start flex justify-center items-center flex-col">
-      <div className="loadbg">
-        <b className="text-gray-500 text-6xl loadtext">LOADING</b>
-        <br />
-        <h2 className="text-gray-300 loadtitle" id="lastElem_load">
-          Please Wait...
-        </h2>
-      </div>
+    <div className="loadscreen bg-black fixed top-0 left-0 w-screen h-screen flex justify-center items-center">
+      <div className="spinner-border animate-spin inline-block w-16 h-16 border-4 rounded-full border-gray-500 border-t-transparent"></div>
     </div>
   ) : (
     <div></div>
