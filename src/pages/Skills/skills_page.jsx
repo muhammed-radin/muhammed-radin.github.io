@@ -117,35 +117,35 @@ function SkillsPage() {
           <LangCard
             lang="Typescript"
             image="https://img.icons8.com/color/58/typescript--v1.png"
-            progress={88}
+            progress={89}
             color="#673ab7"
             shadow="#673ab750"
           />
           <LangCard
             lang="ReactJS"
             image="https://img.icons8.com/external-tal-revivo-color-tal-revivo/58/external-react-a-javascript-library-for-building-user-interfaces-logo-color-tal-revivo.png"
-            progress={86}
+            progress={89}
             color="#00ffb0"
             shadow="#00ffb050"
           />
           <LangCard
             lang="TailwindCSS"
             image="https://img.icons8.com/color/58/tailwind_css.png"
-            progress={86}
+            progress={90}
             color="#00574f"
             shadow="#00574f"
           />
           <LangCard
             lang="Firebase"
             image="https://img.icons8.com/color/58/firebase.png"
-            progress={86}
+            progress={85}
             color="#ff6f00"
             shadow="#ff6f0050"
           />
           <LangCard
             lang="Express"
             image="https://img.icons8.com/officel/58/express-js.png"
-            progress={30}
+            progress={86}
             color="#afc0d3"
             shadow="#afc0d350"
           />
@@ -159,16 +159,23 @@ function SkillsPage() {
           <LangCard
             lang="NodeJS"
             image="https://img.icons8.com/fluency/48/node-js.png"
-            progress={60}
+            progress={87}
             color="#21a366"
             shadow="#21a36650"
           />
           <LangCard
             lang="Sass"
             image="https://img.icons8.com/color/58/sass--v1.png"
-            progress={60}
+            progress={85}
             color="#ed6191"
             shadow="#ed619150"
+          />
+          <LangCard
+            lang="MongoDB"
+            image="https://img.icons8.com/color/58/mongodb--v1.png"
+            progress={60}
+            color="#9ced61"
+            shadow="#9ced61"
           />
         </div>
       </div>

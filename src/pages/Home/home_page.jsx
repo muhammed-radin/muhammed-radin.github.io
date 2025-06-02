@@ -24,6 +24,7 @@ function HomePage() {
               "Frontend Developer.",
               "Fullstack Developer",
               "Game Developer",
+              "MERN Stack Developer"
             ]}
             loop={false}
             cursor={true}
