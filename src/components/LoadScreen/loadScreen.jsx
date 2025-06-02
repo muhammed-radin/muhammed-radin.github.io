@@ -1,31 +1,45 @@
-import { useEffect, useState } from "react";
-import "./loadScreen.css";
+import { useEffect, useRef, useState } from "react";
+// import "./loadScreen.css";
+import { animate } from "animejs";
 
 function LoadScreen() {
-  const [isLoading, setIsLoading] = useState(false); // set true after test
+  const [isLoading, setIsLoading] = useState(true);
+  const loaded = useRef(false);
 
-  // remove after test:-
-  document.body.style.setProperty("--load-anim-state", "running");
-  /////////////////
-
-
-  const handleLoading = () => {
+  const startApp = () => {
     setIsLoading(false);
     document.body.style.setProperty("--load-anim-state", "running");
   };
 
   useEffect(() => {
-    window.addEventListener("load", handleLoading);
-    return () => window.removeEventListener("load", handleLoading);
+    animate([".loadtext", ".loadtitle"], {
+      opacity: [0, 1],
+      translateY: [100, 0],
+      delay: (_, i) => i * 200
+    });
+
+    const onLoad = () => {
+      if (!loaded.current) {
+        startApp();
+        loaded.current = true;
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", onLoad);
+    window.addEventListener("load", onLoad);
+    return () => {
+      document.removeEventListener("DOMContentLoaded", onLoad);
+      window.removeEventListener("load", onLoad);
+    };
   }, []);
 
   return isLoading ? (
-    <div className="bg-white fixed top-0 left-0 w-screen h-screen text-7xl text-gray-800 text-start flex justify-center items-center flex-col">
-      <div>
-        <b className="text-gray-600 text-6xl loadtext">HI, iam</b>
+    <div className="loadscreen bg-zinc-900 fixed top-0 left-0 w-screen h-screen text-[clamp(32px,10vw,72px)] text-gray-800 text-start flex justify-center items-center flex-col">
+      <div className="loadbg">
+        <b className="text-gray-500 text-6xl loadtext">LOADING</b>
         <br />
-        <h2 className="text-gray-900 loadtitle" id="lastElem_load">
-          Muhammed Radin
+        <h2 className="text-gray-300 loadtitle" id="lastElem_load">
+          Please Wait...
         </h2>
       </div>
     </div>

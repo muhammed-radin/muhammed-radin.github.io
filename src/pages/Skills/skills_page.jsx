@@ -1,38 +1,73 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LangCard from "../../components/langCard/langCard";
 import "./skills.css";
 import { animate } from "animejs";
-import { useInView } from "react-intersection-observer";
+// import { useInView } from "react-intersection-observer";
 
 function SkillsPage() {
-  const { ref, inView } = useInView();
   const [isSmallDevice, setSMLDevice] = useState(false);
+  const animationManager = useRef(null);
+  const el = useRef(null);
 
   useEffect(() => {
-    if (inView) {
-      if (!isSmallDevice) {
-        animate([".langCard", '#skills .title', '#skills .subtitle'], {
+    if (!isSmallDevice) {
+      animationManager.current = animate(
+        ["#skills .title", "#skills .subtitle", ".langCard"],
+        {
           duration: 600,
           translateY: ["50px", "0px"],
           delay: (v, i) => i * 100,
           opacity: [0, 1],
-        });
-      } else {
-        animate([".langCard", '#skills .title', '#skills .subtitle'], {
+          autoplay: false,
+        }
+      );
+    } else {
+      animationManager.current = animate(
+        ["#skills .title", "#skills .subtitle", ".langCard"],
+        {
           duration: 600,
+          autoplay: false,
           translateX: (v, i) => {
             if (i % 2 == 0) {
-              return ["50px", "0px"];
+              return ["100px", "0px"];
             } else {
-              return ["-50px", "0px"];
+              return ["-100px", "0px"];
             }
           },
           delay: (v, i) => i * 100,
           opacity: [0, 1],
-        });
-      }
+        }
+      );
     }
-  }, [inView]);
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach((entry) => {
+          console.log(!isSmallDevice);
+
+          if (!isSmallDevice) {
+            // animationManager.current.seek(
+            //   entry.intersectionRatio.toFixed(2) * 2400
+            // );
+            if (entry.isIntersecting) animationManager.current.play();
+          } else {
+            if (entry.isIntersecting) animationManager.current.play();
+          }
+        });
+      },
+      {
+        root: document.querySelector(".scroll-container"),
+        threshold: Array.from({ length: 1000 }, (_, i) => i / 1000),
+      }
+    );
+
+    observer.observe(el.current);
+
+    updateRes();
+    window.onresize = function () {
+      updateRes();
+    };
+  }, []);
 
   function updateRes() {
     if (window.innerWidth <= 800) {
@@ -42,20 +77,19 @@ function SkillsPage() {
     }
   }
 
-  useEffect(function () {
-    updateRes();
-    window.onresize = function () {
-      updateRes();
-    };
-  }, []);
-
   return (
-    <div id="skills" className=" w-full p-2 flex justify-center items-center flex-col text-start my-10" ref={ref}>
+    <div
+      id="skills"
+      className=" w-full p-2 flex justify-center items-center flex-col text-start my-10"
+      ref={el}
+    >
       <div className="m-4 my-7 p-3 w-1/2 max-sm:w-[90%] flex flex-col align-middle justify-center items-start">
         <h1 className="text-[clamp(_20px,_10vw,_40px)] font-bold text-amber-400 title">
           Skills
         </h1>
-        <h3 className="text-[clamp(_16px,_10vw,_32px)] mx-3 subtitle">What I Know?</h3>
+        <h3 className="text-[clamp(_16px,_10vw,_32px)] mx-3 subtitle">
+          What I Know?
+        </h3>
       </div>
       <div className="flex justify-center items-center flex-col w-full text-start">
         <div className="flex gap-5 justify-evenly items-center flex-wrap w-2/3 h-full">

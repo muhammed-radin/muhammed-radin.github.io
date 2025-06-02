@@ -1,8 +1,27 @@
-.loadtext, .loadtitle {
-    animation: fadeInUp 1s 1;
-    display: inline-block;
+.loadbg {
+  /* background: linear-gradient(to left, #222, #333, #333, #222);
+  background-position-x: var(--postion-x);
+  animation: skeletonX 8s infinite linear; */
+  transition: all 0.3s;
 }
 
+.loadtext,
 .loadtitle {
-    animation-delay: 200ms;
+  color: linear-gradient(to left, #222, #333, #333, #222) !important;
+  animation: skeletonX 8s infinite linear;
+}
+
+@property --postion-x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 10px;
+}
+
+@keyframes skeletonX {
+  from {
+    --postion-x: 0px;
+  }
+  to {
+    --postion-x: 1000px;
+  }
 }
